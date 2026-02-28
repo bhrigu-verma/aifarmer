@@ -400,8 +400,7 @@ The app exposes `GET /health` which returns:
 ```json
 {
   "status": "healthy",
-  "app": "AI Farmer Assistant",
-  "version": "1.0.0"
+  "app": "AI Farmer Assistant"
 }
 ```
 

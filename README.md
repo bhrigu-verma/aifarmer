@@ -145,7 +145,7 @@ pytest tests/ -v
 
 ```bash
 curl http://localhost:8000/health
-# {"status":"healthy","app":"AI Farmer Assistant","version":"1.0.0"}
+# {"status":"healthy","app":"AI Farmer Assistant"}
 ```
 
 ---
