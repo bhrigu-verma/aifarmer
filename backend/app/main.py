@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -14,10 +16,18 @@ from app.routers import (
     diary,
 )
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    database.create_tables()
+    yield
+
+
 app = FastAPI(
     title=settings.app_name,
     description="AI-powered farming assistant for Indian farmers",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -27,11 +37,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.on_event("startup")
-async def startup():
-    database.create_tables()
 
 
 @app.get("/health")

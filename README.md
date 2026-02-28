@@ -43,7 +43,7 @@ AI Farmer Assistant fills this gap.
 | **Image Processing** | Pillow 12.1 | Crop disease photo handling |
 | **ML (Planned)** | TensorFlow Lite / ONNX | On-device disease detection (EfficientNet-B0) |
 | **Auth** | python-jose + passlib | JWT token authentication (configured) |
-| **Testing** | pytest + pytest-asyncio | 24 unit tests across all features |
+| **Testing** | pytest + pytest-asyncio | 34 unit tests across all features |
 | **Deployment** | AWS Mumbai (ECS Fargate) | Low-latency for Indian users |
 
 ---
@@ -97,14 +97,16 @@ aifarmer/
 │   │   │   └── weather_service.py # Open-Meteo integration + alerts
 │   │   └── ml/
 │   │       └── disease_detection.py  # ML model placeholder (EfficientNet-B0)
-│   └── tests/                 # Test suite (24 tests)
+│   └── tests/                 # Test suite (34 tests)
 │       ├── conftest.py        # Test DB setup + fixtures
-│       ├── test_farmers.py    # 6 farmer CRUD tests
+│       ├── test_farmers.py    # 7 farmer CRUD tests
 │       ├── test_crops.py      # 4 crop recommendation tests
 │       ├── test_diary.py      # 4 diary + summary tests
 │       ├── test_mandi.py      # 3 mandi price tests
 │       ├── test_pests.py      # 4 disease detection tests
 │       ├── test_schemes.py    # 2 scheme tests
+│       ├── test_weather.py    # 6 weather forecast + alert tests
+│       ├── test_inputs.py     # 3 input guide tests
 │       └── test_health.py     # 1 health check test
 ```
 
