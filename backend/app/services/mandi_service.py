@@ -101,7 +101,7 @@ def get_sell_recommendation(
     current = results[0].modal_price
     avg_30d = sum(r.modal_price for r in results) / len(results)
 
-    if avg_30d == 0:
+    if avg_30d < 0.01:
         rec, reason, reason_hi = (
             "hold",
             "Average price is zero. No actionable data.",
