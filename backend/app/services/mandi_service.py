@@ -101,7 +101,13 @@ def get_sell_recommendation(
     current = results[0].modal_price
     avg_30d = sum(r.modal_price for r in results) / len(results)
 
-    if current >= avg_30d * 1.1:
+    if avg_30d == 0:
+        rec, reason, reason_hi = (
+            "hold",
+            "Average price is zero. No actionable data.",
+            "औसत मूल्य शून्य है। कोई कार्रवाई योग्य डेटा नहीं।",
+        )
+    elif current >= avg_30d * 1.1:
         rec, reason, reason_hi = (
             "sell_now",
             f"Current price ₹{current}/q is {((current - avg_30d) / avg_30d * 100):.0f}% above 30-day average. Good time to sell.",

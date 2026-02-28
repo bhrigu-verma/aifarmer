@@ -52,12 +52,12 @@ def get_season_summary(
         .all()
     )
 
-    total_expenses = sum(e.expense_amount for e in entries)
-    total_income = sum(e.income_amount for e in entries)
+    total_expenses = sum(e.expense_amount or 0 for e in entries)
+    total_income = sum(e.income_amount or 0 for e in entries)
     breakdown: dict = {}
     for e in entries:
         cat = e.category or "other"
-        breakdown[cat] = breakdown.get(cat, 0) + e.expense_amount
+        breakdown[cat] = breakdown.get(cat, 0) + (e.expense_amount or 0)
 
     return SeasonSummary(
         season=season,
