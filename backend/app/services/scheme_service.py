@@ -1,0 +1,105 @@
+from typing import List
+
+from app.schemas.scheme import GovernmentScheme, SchemeResponse
+
+
+GOVERNMENT_SCHEMES = [
+    GovernmentScheme(
+        scheme_name="PM-KISAN",
+        scheme_name_hi="प्रधानमंत्री किसान सम्मान निधि",
+        description="Direct income support of ₹6,000 per year in three installments to farmer families",
+        description_hi="किसान परिवारों को तीन किस्तों में ₹6,000 प्रति वर्ष सीधी आय सहायता",
+        eligibility=["Must own cultivable land", "Not a government employee", "Not an income tax payer"],
+        eligibility_hi=["खेती योग्य भूमि का मालिक हो", "सरकारी कर्मचारी न हो", "आयकर दाता न हो"],
+        benefits="₹6,000 per year (₹2,000 every 4 months)",
+        benefits_hi="₹6,000 प्रति वर्ष (हर 4 महीने में ₹2,000)",
+        how_to_apply=["Visit nearest CSC centre", "Carry Aadhaar card, land records, bank passbook", "Or apply online at pmkisan.gov.in"],
+        how_to_apply_hi=["नजदीकी CSC केंद्र जाएं", "आधार कार्ड, भूमि रिकॉर्ड, बैंक पासबुक ले जाएं", "या pmkisan.gov.in पर ऑनलाइन आवेदन करें"],
+        website="https://pmkisan.gov.in",
+        helpline="155261",
+    ),
+    GovernmentScheme(
+        scheme_name="PM Fasal Bima Yojana",
+        scheme_name_hi="प्रधानमंत्री फसल बीमा योजना",
+        description="Crop insurance scheme covering losses from natural calamities, pests, and diseases",
+        description_hi="प्राकृतिक आपदाओं, कीटों और बीमारियों से होने वाले नुकसान को कवर करने वाली फसल बीमा योजना",
+        eligibility=["All farmers growing notified crops", "Both loanee and non-loanee farmers", "Sharecroppers and tenant farmers with documents"],
+        eligibility_hi=["अधिसूचित फसल उगाने वाले सभी किसान", "ऋणी और गैर-ऋणी दोनों किसान", "दस्तावेजों के साथ बटाईदार और किरायेदार किसान"],
+        benefits="Full insured amount for crop loss above threshold",
+        benefits_hi="सीमा से ऊपर फसल नुकसान के लिए पूर्ण बीमित राशि",
+        how_to_apply=["Apply through bank/CSC within sowing window", "Premium: 2% Kharif, 1.5% Rabi, 5% commercial crops", "Crop cutting experiments determine payout"],
+        how_to_apply_hi=["बुवाई अवधि के भीतर बैंक/CSC के माध्यम से आवेदन करें", "प्रीमियम: 2% खरीफ, 1.5% रबी, 5% व्यावसायिक फसलें", "फसल कटाई प्रयोग भुगतान निर्धारित करते हैं"],
+        website="https://pmfby.gov.in",
+        helpline="1800-180-1551",
+    ),
+    GovernmentScheme(
+        scheme_name="Kisan Credit Card",
+        scheme_name_hi="किसान क्रेडिट कार्ड",
+        description="Provides affordable credit to farmers for crop production, post-harvest, and consumption needs",
+        description_hi="किसानों को फसल उत्पादन, कटाई के बाद और उपभोग जरूरतों के लिए किफायती ऋण",
+        eligibility=["All farmers - individual or joint", "Owner cultivators", "Tenant farmers, sharecroppers", "Self-help groups of farmers"],
+        eligibility_hi=["सभी किसान - व्यक्तिगत या संयुक्त", "भूमि मालिक किसान", "किरायेदार किसान, बटाईदार", "किसानों के स्वयं सहायता समूह"],
+        benefits="Credit up to ₹3 lakh at 4% interest (with prompt repayment)",
+        benefits_hi="शीघ्र भुगतान पर 4% ब्याज दर पर ₹3 लाख तक का ऋण",
+        how_to_apply=["Visit nearest bank branch", "Carry Aadhaar, land records, passport photo", "KCC issued within 14 days"],
+        how_to_apply_hi=["नजदीकी बैंक शाखा जाएं", "आधार, भूमि रिकॉर्ड, पासपोर्ट फोटो ले जाएं", "14 दिनों में KCC जारी होता है"],
+        website="https://www.pmjdy.gov.in",
+        helpline="1800-180-1111",
+    ),
+    GovernmentScheme(
+        scheme_name="Soil Health Card Scheme",
+        scheme_name_hi="मृदा स्वास्थ्य कार्ड योजना",
+        description="Provides soil health cards to farmers with nutrient status and fertiliser recommendations",
+        description_hi="किसानों को पोषक तत्व स्थिति और उर्वरक सिफारिशों के साथ मृदा स्वास्थ्य कार्ड",
+        eligibility=["All farmers across India"],
+        eligibility_hi=["भारत भर के सभी किसान"],
+        benefits="Free soil testing and personalised fertiliser recommendations every 2 years",
+        benefits_hi="हर 2 साल में मुफ्त मिट्टी परीक्षण और व्यक्तिगत उर्वरक सिफारिशें",
+        how_to_apply=["Visit nearest Krishi Vigyan Kendra or soil testing lab", "Sample collection by agriculture department"],
+        how_to_apply_hi=["नजदीकी कृषि विज्ञान केंद्र या मिट्टी परीक्षण लैब जाएं", "कृषि विभाग द्वारा नमूना संग्रह"],
+        website="https://soilhealth.dac.gov.in",
+        helpline="1800-180-1551",
+    ),
+    GovernmentScheme(
+        scheme_name="eNAM",
+        scheme_name_hi="राष्ट्रीय कृषि बाजार (eNAM)",
+        description="Online trading platform for agricultural commodities connecting mandis across India",
+        description_hi="कृषि वस्तुओं के लिए ऑनलाइन व्यापार मंच जो भारत भर की मंडियों को जोड़ता है",
+        eligibility=["All farmers, traders, and FPOs"],
+        eligibility_hi=["सभी किसान, व्यापारी और FPO"],
+        benefits="Better price discovery, transparent bidding, online payment",
+        benefits_hi="बेहतर मूल्य खोज, पारदर्शी बोली, ऑनलाइन भुगतान",
+        how_to_apply=["Register at nearest eNAM mandi", "Carry Aadhaar and bank details", "Or register at enam.gov.in"],
+        how_to_apply_hi=["नजदीकी eNAM मंडी में पंजीकरण करें", "आधार और बैंक विवरण ले जाएं", "या enam.gov.in पर पंजीकरण करें"],
+        website="https://enam.gov.in",
+        helpline="1800-270-0224",
+    ),
+    GovernmentScheme(
+        scheme_name="MNREGA",
+        scheme_name_hi="महात्मा गांधी राष्ट्रीय ग्रामीण रोजगार गारंटी अधिनियम",
+        description="Guarantees 100 days of wage employment per year to rural households for unskilled manual work",
+        description_hi="ग्रामीण परिवारों को अकुशल शारीरिक काम के लिए प्रति वर्ष 100 दिन का वेतन रोजगार",
+        eligibility=["Rural household members willing to do unskilled manual work", "Must apply at Gram Panchayat"],
+        eligibility_hi=["अकुशल शारीरिक काम करने को तैयार ग्रामीण परिवार के सदस्य", "ग्राम पंचायत में आवेदन करें"],
+        benefits="100 days employment at state minimum wage rate",
+        benefits_hi="राज्य न्यूनतम मजदूरी दर पर 100 दिन रोजगार",
+        how_to_apply=["Apply at Gram Panchayat", "Get job card", "Demand work in writing"],
+        how_to_apply_hi=["ग्राम पंचायत में आवेदन करें", "जॉब कार्ड प्राप्त करें", "लिखित में काम की मांग करें"],
+        website="https://nrega.nic.in",
+        helpline="1800-345-22-44",
+    ),
+]
+
+
+def get_eligible_schemes(
+    state: str,
+    land_size_acres: float,
+    farmer_name: str = "",
+) -> SchemeResponse:
+    eligible = list(GOVERNMENT_SCHEMES)
+    return SchemeResponse(
+        farmer_name=farmer_name,
+        state=state,
+        total_schemes=len(eligible),
+        schemes=eligible,
+    )
